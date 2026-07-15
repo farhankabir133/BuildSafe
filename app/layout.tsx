@@ -43,7 +43,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${mono.variable} dark`}>
-      <body className="font-sans antialiased grain">{children}</body>
+      <body className="font-sans antialiased grain overflow-x-hidden">{children}</body>
     </html>
   );
 }

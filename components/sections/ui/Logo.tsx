@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function Logo({ compact = false }: { compact?: boolean }) {
   return (
-    <div className="flex items-center gap-2.5">
+    <div className="flex items-center gap-2 min-w-0">
       <motion.svg
         width="26"
         height="26"
@@ -13,6 +13,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
         initial={{ rotate: -8, opacity: 0 }}
         animate={{ rotate: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="shrink-0"
       >
         <defs>
           <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32">
@@ -68,11 +69,11 @@ export function Logo({ compact = false }: { compact?: boolean }) {
         />
       </motion.svg>
       {!compact && (
-        <div className="leading-none">
-          <div className="text-[15px] font-semibold tracking-tight text-white">
+        <div className="leading-none min-w-0 truncate">
+          <div className="text-[15px] font-semibold tracking-tight text-white truncate">
             BuildSafe
           </div>
-          <div className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/40">
+          <div className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/40 truncate">
             Intelligence
           </div>
         </div>
