@@ -4,7 +4,7 @@
 
 > Every weather forecast should end with a decision.
 
-BuildSafe Intelligence continuously analyzes atmospheric conditions and transforms them into actionable, trade-specific directives — keeping construction projects safer, faster, and more predictable. This repository contains the marketing/showcase front-end for the platform, including a fully interactive, live-simulated **Construction Intelligence Engine**.
+BuildSafe Intelligence continuously analyzes atmospheric conditions and transforms them into actionable, trade-specific directives — keeping construction projects safer, faster, and more predictable. This repository contains the marketing/showcase front-end for the platform, including a fully interactive, live-simulated **Construction Intelligence Engine** with ultra-responsive design across all devices.
 
 ---
 
@@ -29,6 +29,17 @@ BuildSafe Intelligence continuously analyzes atmospheric conditions and transfor
 Traditional weather dashboards stop at "it might rain." BuildSafe Intelligence goes further: it ingests hyper-local weather, normalizes it into a structured model, evaluates it against construction rules, computes a composite site risk score, and issues a **Go / Caution / Hold** directive per activity — all in real time.
 
 The showcase site demonstrates this with a **live simulation engine** running in the browser. You can switch between scenarios (Clear Sky, Heavy Rain, Storm Warning, Extreme Heat, High Wind) and watch the engine re-evaluate risk, fire rules, and update operational directives on every cycle.
+
+### Ultra-Responsive Design
+
+The front-end is built with a **mobile-first, device-agnostic approach** ensuring optimal viewing across all screen sizes:
+
+- **Custom Breakpoints**: `xs` (475px), `sm` (640px), `md` (768px), `lg` (1024px), `xl` (1280px), `2xl` (1536px), `3xl` (1920px), `ultra` (2560px)
+- **Fluid Typography**: Base font scales smoothly between 14px and 16px using `clamp()`
+- **Touch Optimizations**: 44px minimum tap targets, safe area inset support for notched devices
+- **Responsive Components**: All sections adapt with mobile-first spacing, typography, and grid layouts
+- **Accessibility**: `prefers-reduced-motion` support, keyboard navigation, ARIA labels
+- **Cross-Device**: Optimized for phones, tablets, laptops, desktops, and ultra-wide displays
 
 ---
 
@@ -157,7 +168,7 @@ running against its built-in simulation.
 | ------------ | ---------- |
 | Framework    | [Next.js 15](https://nextjs.org/) (App Router) |
 | UI Library  | [React 19](https://react.dev/) |
-| Styling      | [Tailwind CSS 3](https://tailwindcss.com/) with custom design tokens |
+| Styling      | [Tailwind CSS 3](https://tailwindcss.com/) with custom design tokens, ultra-responsive utilities, and mobile-first breakpoints |
 | Animation    | [Framer Motion 11](https://www.framer.com/motion/) |
 | Icons        | [lucide-react](https://lucide.dev/) + [react-icons](https://react-icons.github.io/react-icons/) |
 | Language     | [TypeScript 5](https://www.typescriptlang.org/) |
@@ -251,7 +262,7 @@ npm run start
 
 ## Configuration
 
-- **`tailwind.config.ts`** — Custom color tokens (`ink`, `accent`, `violet`, `risk`), fonts, shadows, and animations (`shimmer`, `pulseRing`).
+- **`tailwind.config.ts`** — Custom color tokens (`ink`, `accent`, `violet`, `risk`), fonts, shadows, animations (`shimmer`, `pulseRing`), and ultra-responsive breakpoints (`xs` through `ultra`).
 - **`next.config.mjs`** — React Strict Mode enabled.
 - **`lib/utils.ts`** — `cn()` helper combining `clsx` and `tailwind-merge` for conditional class names.
 - **Scenarios** — Defined in `components/engine/SimulationProvider.tsx` via the `SCENARIOS` and `RULES` arrays. Adjust baselines, thresholds, and severities to model your own site conditions.

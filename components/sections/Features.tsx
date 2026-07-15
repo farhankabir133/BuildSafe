@@ -42,22 +42,22 @@ function FeatureCard({
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -4 }}
       className={cn(
-        "group surface relative flex flex-col overflow-hidden p-5 outline-none transition-shadow duration-300",
+        "group surface relative flex flex-col overflow-hidden p-4 sm:p-5 outline-none transition-shadow duration-300",
         "hover:border-lineStrong hover:shadow-glow focus-visible:border-lineStrong",
         className
       )}
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      <div className="mb-4 flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-ink-900/60 text-accent-soft">
-          <Icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
+      <div className="mb-3 sm:mb-4 flex items-center gap-2.5 sm:gap-3">
+        <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-lg border border-line bg-ink-900/60 text-accent-soft">
+          <Icon className="h-4 w-4 sm:h-[18px] sm:w-[18px]" strokeWidth={1.75} />
         </div>
-        <h3 className="text-[15px] font-semibold text-white/90">{title}</h3>
+        <h3 className="text-[14px] sm:text-[15px] font-semibold text-white/90">{title}</h3>
       </div>
-      <p className="max-w-sm text-[13px] leading-relaxed text-white/50">
+      <p className="text-[13px] sm:text-[13px] leading-relaxed text-white/50">
         {desc}
       </p>
-      <div className="mt-auto pt-5">{children(active)}</div>
+      <div className="mt-auto pt-4 sm:pt-5">{children(active)}</div>
     </motion.div>
   );
 }
@@ -248,20 +248,20 @@ function MiniShield({ active }: { active: boolean }) {
 
 export function Features() {
   return (
-    <section id="features" className="relative px-6 py-24 md:px-8 md:py-32">
+    <section id="features" className="relative px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:py-32">
       <div className="shell">
-        <div className="mb-12 max-w-prose2">
+        <div className="mb-10 max-w-prose2">
           <span className="eyebrow mb-4">Capabilities</span>
-          <h2 className="text-balance text-3xl font-semibold tracking-tight text-white md:text-[2.6rem] md:leading-[1.05]">
+          <h2 className="text-balance text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-[2.6rem] md:leading-[1.05]">
             One engine. Every operational decision.
           </h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-white/55">
+          <p className="mt-4 text-[14px] leading-relaxed text-white/55 sm:text-[15px]">
             Hover any capability to see it think. BuildSafe is not a dashboard —
             it is a system that reasons about your site in real time.
           </p>
         </div>
 
-        <div className="grid auto-rows-[minmax(0,1fr)] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid auto-rows-[minmax(0,1fr)] grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <FeatureCard
             icon={Brain}
             title="Construction Intelligence"

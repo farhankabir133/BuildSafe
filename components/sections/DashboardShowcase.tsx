@@ -175,14 +175,14 @@ export function DashboardShowcase() {
   }, []);
 
   return (
-    <section id="dashboard" className="relative px-6 py-24 md:px-8 md:py-32">
+    <section id="dashboard" className="relative px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:py-32">
       <div className="shell">
-        <div className="mb-12 max-w-prose2">
+        <div className="mb-10 max-w-prose2">
           <span className="eyebrow mb-4">Live Dashboard</span>
-          <h2 className="text-balance text-3xl font-semibold tracking-tight text-white md:text-[2.6rem] md:leading-[1.05]">
+          <h2 className="text-balance text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-[2.6rem] md:leading-[1.05]">
             The operational surface your crews actually use.
           </h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-white/55">
+          <p className="mt-4 text-[14px] leading-relaxed text-white/55 sm:text-[15px]">
             Not a screenshot. A real, live interface — synchronized with the
             engine above. Scroll the activity log and watch it think.
           </p>
@@ -196,26 +196,26 @@ export function DashboardShowcase() {
           className="surface overflow-hidden p-0"
         >
           {/* top bar */}
-          <div className="flex items-center justify-between border-b border-line bg-ink-900/40 px-4 py-3">
-            <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent to-violet text-ink-950">
-                <Layers className="h-4 w-4" />
+          <div className="flex items-center justify-between border-b border-line bg-ink-900/40 px-3 py-2.5 sm:px-4 sm:py-3">
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent to-violet text-ink-950">
+                <Layers className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </div>
               <div>
-                <div className="text-[13px] font-semibold text-white/90">
+                <div className="text-[12px] sm:text-[13px] font-semibold text-white/90">
                   Tower B — Operations
                 </div>
-                <div className="text-[11px] text-white/40">
+                <div className="text-[10px] sm:text-[11px] text-white/40">
                   BuildSafe Control
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <span className="hidden font-mono text-[12px] text-white/50 sm:inline">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span className="hidden font-mono text-[11px] sm:text-[12px] text-white/50 sm:inline">
                 {now}
               </span>
               <span
-                className="flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium"
+                className="flex items-center gap-1.5 rounded-full border px-2 py-1 text-[10px] sm:text-[11px] font-medium"
                 style={{ borderColor: `${tier.color}55`, color: tier.color }}
               >
                 <StatusDot
@@ -228,11 +228,11 @@ export function DashboardShowcase() {
             </div>
           </div>
 
-          <div className="grid gap-4 p-4 lg:grid-cols-[1.4fr_1fr]">
-            <div className="space-y-4">
+          <div className="grid gap-3 sm:gap-4 p-3 sm:p-4 lg:grid-cols-[1.4fr_1fr]">
+            <div className="space-y-3 sm:space-y-4">
               <WeatherStrip />
 
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 sm:grid-cols-4">
                 {[
                   { icon: Gauge, label: "Risk score", value: snap.risk, node: tier.color },
                   { icon: ShieldAlert, label: "Active rules", value: snap.triggered.length, node: "#FF5C5C" },
@@ -243,13 +243,13 @@ export function DashboardShowcase() {
                   return (
                     <div
                       key={kpi.label}
-                      className="rounded-xl border border-line bg-ink-900/50 p-3 transition-colors hover:border-lineStrong"
+                      className="rounded-xl border border-line bg-ink-900/50 p-2.5 sm:p-3 transition-colors hover:border-lineStrong"
                     >
                       <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wide text-white/40">
                         <Icon className="h-3 w-3" /> {kpi.label}
                       </div>
                       <div
-                        className="mt-1 text-2xl font-semibold tabular-nums"
+                        className="mt-1 text-xl sm:text-2xl font-semibold tabular-nums"
                         style={{ color: kpi.node }}
                       >
                         <AnimatedNumber value={kpi.value} />
@@ -259,35 +259,35 @@ export function DashboardShowcase() {
                 })}
               </div>
 
-              <div className="rounded-xl border border-line bg-ink-900/40 p-4">
+              <div className="rounded-xl border border-line bg-ink-900/40 p-3 sm:p-4">
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="text-[13px] font-semibold text-white/85">
+                  <span className="text-[12px] sm:text-[13px] font-semibold text-white/85">
                     Composite risk — live
                   </span>
-                  <span className="text-[11px] text-white/40">rolling 48 cycles</span>
+                  <span className="text-[10px] sm:text-[11px] text-white/40">rolling 48 cycles</span>
                 </div>
                 <RiskChart />
               </div>
             </div>
 
-            <div className="space-y-4">
-              <div className="rounded-xl border border-line bg-ink-900/40 p-4">
-                <div className="mb-3 text-[13px] font-semibold text-white/85">
+            <div className="space-y-3 sm:space-y-4">
+              <div className="rounded-xl border border-line bg-ink-900/40 p-3 sm:p-4">
+                <div className="mb-2.5 sm:mb-3 text-[12px] sm:text-[13px] font-semibold text-white/85">
                   Recommendations
                 </div>
                 <Recommendations />
               </div>
 
-              <div className="flex max-h-64 flex-col rounded-xl border border-line bg-ink-900/40 p-4">
-                <div className="mb-2 text-[13px] font-semibold text-white/85">
+              <div className="flex max-h-56 sm:max-h-64 flex-col rounded-xl border border-line bg-ink-900/40 p-3 sm:p-4">
+                <div className="mb-2 text-[12px] sm:text-[13px] font-semibold text-white/85">
                   Activity timeline
                 </div>
                 <div className="mask-fade-y flex-1 space-y-0 overflow-y-auto pr-1">
                   {ACTIVITY.map((a, i) => (
-                    <div key={i} className="flex gap-3 py-1.5">
+                    <div key={i} className="flex gap-2.5 sm:gap-3 py-1.5">
                       <div className="flex flex-col items-center">
                         <span
-                          className={`mt-1 h-2 w-2 rounded-full ${
+                          className={`mt-1 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full ${
                             a.k === "ok"
                               ? "bg-risk-safe"
                               : a.k === "warn"
@@ -300,10 +300,10 @@ export function DashboardShowcase() {
                         )}
                       </div>
                       <div className="pb-1">
-                        <div className="font-mono text-[10px] text-white/35">
+                        <div className="font-mono text-[9px] sm:text-[10px] text-white/35">
                           {a.t}
                         </div>
-                        <div className="text-[12px] text-white/70">{a.m}</div>
+                        <div className="text-[11px] sm:text-[12px] text-white/70">{a.m}</div>
                       </div>
                     </div>
                   ))}

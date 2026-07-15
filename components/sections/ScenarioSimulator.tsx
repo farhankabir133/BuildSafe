@@ -67,11 +67,11 @@ export function ScenarioControl() {
   return (
     <div>
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-white/45">
+        <span className="text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.16em] text-white/45">
           Scenario
         </span>
         <span
-          className="flex items-center gap-1.5 text-[10px] uppercase tracking-wide text-white/40"
+          className="flex items-center gap-1.5 text-[9px] sm:text-[10px] uppercase tracking-wide text-white/40"
           aria-live="polite"
         >
           {loading ? (
@@ -100,7 +100,7 @@ export function ScenarioControl() {
       </div>
 
       {live && error && (
-        <div className="mb-2 rounded-md border border-risk-danger/30 bg-risk-danger/5 px-2.5 py-1.5 text-[10px] text-risk-danger/90">
+        <div className="mb-2 rounded-md border border-risk-danger/30 bg-risk-danger/5 px-2.5 py-1.5 text-[9px] sm:text-[10px] text-risk-danger/90">
           {error}
         </div>
       )}
@@ -124,7 +124,7 @@ export function ScenarioControl() {
                 aria-label={`${s.label}. ${SCENARIO_DESC[s.id]}`}
                 tabIndex={i === activeIndex ? 0 : -1}
                 onClick={() => (s.id === "live" ? enableLive() : setScenario(s.id))}
-                className="group relative rounded-full border border-line px-3 py-1.5 text-[12px] font-medium outline-none transition-colors duration-200 hover:border-lineStrong hover:bg-white/[0.04] focus-visible:border-accent/60 focus-visible:ring-2 focus-visible:ring-accent/40"
+                className="group relative rounded-full border border-line px-2.5 py-1.5 text-[11px] sm:text-[12px] font-medium outline-none transition-colors duration-200 hover:border-lineStrong hover:bg-white/[0.04] focus-visible:border-accent/60 focus-visible:ring-2 focus-visible:ring-accent/40 min-h-[36px] sm:min-h-[38px]"
               >
                 {active && (
                   <motion.span

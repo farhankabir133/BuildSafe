@@ -131,56 +131,56 @@ export function Analytics() {
   const safetyTrend = [60, 64, 71, 73, 80, 84, 88];
 
   return (
-    <section id="analytics" className="relative px-6 py-24 md:px-8 md:py-32">
+    <section id="analytics" className="relative px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:py-32">
       <div className="shell">
-        <div className="mb-12 max-w-prose2">
+        <div className="mb-10 max-w-prose2">
           <span className="eyebrow mb-4">Analytics</span>
-          <h2 className="text-balance text-3xl font-semibold tracking-tight text-white md:text-[2.6rem] md:leading-[1.05]">
+          <h2 className="text-balance text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-[2.6rem] md:leading-[1.05]">
             Measure what weather actually costs.
           </h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-white/55">
+          <p className="mt-4 text-[14px] leading-relaxed text-white/55 sm:text-[15px]">
             Every decision is logged, scored, and visualized — so leadership can
             see the compounding value of operating to conditions.
           </p>
         </div>
 
-        <div ref={ref} className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <div ref={ref} className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {STATS.map((s, i) => (
             <motion.div
               key={s.label}
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="surface p-5"
+              className="surface p-4 sm:p-5"
             >
-              <div className="text-3xl font-semibold tracking-tight text-white">
+              <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-white">
                 <span className="text-white/60">{s.prefix ?? ""}</span>
                 <AnimatedNumber value={s.value} decimals={s.decimals ?? 0} />
-                <span className="text-lg text-white/50">{s.suffix}</span>
+                <span className="text-base text-white/50">{s.suffix}</span>
               </div>
-              <div className="mt-1 text-[12px] text-white/45">{s.label}</div>
+              <div className="mt-1 text-[11px] sm:text-[12px] text-white/45">{s.label}</div>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-4 grid gap-4 lg:grid-cols-3">
+        <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-3">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="surface p-5 lg:col-span-2"
+            className="surface p-4 sm:p-5 lg:col-span-2"
           >
-            <div className="mb-4 flex items-center justify-between">
+            <div className="mb-3 sm:mb-4 flex items-center justify-between">
               <div>
                 <div className="text-sm font-semibold text-white/90">
                   Risk history
                 </div>
-                <div className="text-[12px] text-white/45">
+                <div className="text-[11px] sm:text-[12px] text-white/45">
                   Composite site risk, 12 cycles
                 </div>
               </div>
-              <span className="text-[11px] uppercase tracking-wide text-white/35">
+              <span className="text-[10px] sm:text-[11px] uppercase tracking-wide text-white/35">
                 Live
               </span>
             </div>
@@ -192,12 +192,12 @@ export function Analytics() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="surface p-5"
+            className="surface p-4 sm:p-5"
           >
-            <div className="mb-4 text-sm font-semibold text-white/90">
+            <div className="mb-3 sm:mb-4 text-sm font-semibold text-white/90">
               Weather incidents
             </div>
-            <div className="text-[12px] text-white/45">YoY reduction</div>
+            <div className="text-[11px] sm:text-[12px] text-white/45">YoY reduction</div>
             <LineChart data={safetyTrend} />
           </motion.div>
 
@@ -206,12 +206,12 @@ export function Analytics() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="surface p-5"
+            className="surface p-4 sm:p-5"
           >
-            <div className="mb-4 text-sm font-semibold text-white/90">
+            <div className="mb-3 sm:mb-4 text-sm font-semibold text-white/90">
               Operational downtime
             </div>
-            <div className="text-[12px] text-white/45">Hours / week by quarter</div>
+            <div className="text-[11px] sm:text-[12px] text-white/45">Hours / week by quarter</div>
             <BarChart
               data={downtime}
               labels={["Q1", "Q2", "Q3", "Q4", "Now"]}
@@ -223,12 +223,12 @@ export function Analytics() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="surface p-5 lg:col-span-2"
+            className="surface p-4 sm:p-5 lg:col-span-2"
           >
-            <div className="mb-4 text-sm font-semibold text-white/90">
+            <div className="mb-3 sm:mb-4 text-sm font-semibold text-white/90">
               Weather trend vs. activity
             </div>
-            <div className="text-[12px] text-white/45">
+            <div className="text-[11px] sm:text-[12px] text-white/45">
               Severity correlation across the program
             </div>
             <AreaChart data={weatherTrend} color="#8B7CFF" />

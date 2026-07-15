@@ -67,28 +67,28 @@ function NodeShell({
       }}
       className="relative"
     >
-      <div className="hero-card relative p-[18px]">
+      <div className="hero-card relative p-3 sm:p-4 md:p-[18px]">
         <motion.div
           aria-hidden
           style={{ opacity: glow }}
           className="pointer-events-none absolute -inset-px z-10 rounded-2xl ring-1 ring-accent/70 shadow-[0_0_34px_-2px_rgba(91,140,255,0.55)]"
         />
-        <div className="relative mb-3.5 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <span className="font-mono text-[10px] text-white/30">
+        <div className="relative mb-2.5 sm:mb-3.5 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-[9px] sm:text-[10px] text-white/30">
               {String(index).padStart(2, "0")}
             </span>
-            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
+            <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
               {label}
             </span>
           </div>
           <StatusDot tone={tone} />
         </div>
-        <div className="relative mb-3 text-[15px] font-semibold tracking-[-0.01em] text-white">
+        <div className="relative mb-2 text-[14px] sm:text-[15px] font-semibold tracking-[-0.01em] text-white">
           {title}
         </div>
         {explain && (
-          <div className="relative mb-3 text-[11px] leading-snug text-white/40">
+          <div className="relative mb-2 text-[10px] sm:text-[11px] leading-snug text-white/40">
             {explain}
           </div>
         )}
@@ -103,7 +103,7 @@ function WeatherNode({ pulse, phase }: { pulse: MotionValue<number>; phase: numb
   return (
     <NodeShell index={1} label="Weather API" title="Live weather ingestion" explain="Ingests live, hyper-local atmospheric observations." tone="safe" pulse={pulse} phase={phase}>
       <ScenarioControl />
-      <div className="mt-3 grid grid-cols-3 gap-2">
+      <div className="mt-3 grid grid-cols-3 gap-1.5 sm:gap-2">
         {METRICS.map((m) => {
           const v = snap.weather[m.key];
           const max =
@@ -123,18 +123,18 @@ function WeatherNode({ pulse, phase }: { pulse: MotionValue<number>; phase: numb
           return (
             <div
               key={m.key}
-              className="rounded-lg border border-line bg-ink-900/60 px-2.5 py-2"
+              className="rounded-lg border border-line bg-ink-900/60 px-2 py-1.5 sm:px-2.5 sm:py-2"
             >
-              <div className="text-[10px] uppercase tracking-wide text-white/40">
+              <div className="text-[9px] sm:text-[10px] uppercase tracking-wide text-white/40">
                 {m.label}
               </div>
               <div className="mt-0.5 flex items-baseline gap-1">
                 <AnimatedNumber
                   value={v}
                   decimals={m.key === "uv" || m.key === "visibility" ? 1 : 0}
-                  className="text-lg font-semibold tabular-nums text-white"
+                  className="text-base sm:text-lg font-semibold tabular-nums text-white"
                 />
-                <span className="text-[10px] text-white/40">
+                <span className="text-[9px] sm:text-[10px] text-white/40">
                   {formatMetric(m.key)}
                 </span>
               </div>
@@ -168,11 +168,11 @@ function NormalizationNode({ pulse, phase }: { pulse: MotionValue<number>; phase
   ];
   return (
     <NodeShell index={2} label="Normalization" title="Standardizing the feed" explain="Standardizes every source into one structured model." tone="safe" pulse={pulse} phase={phase}>
-      <div className="rounded-lg border border-line bg-ink-950/70 p-3 font-mono text-[11px] leading-relaxed">
+      <div className="rounded-lg border border-line bg-ink-950/70 p-2.5 sm:p-3 font-mono text-[10px] sm:text-[11px] leading-relaxed overflow-x-auto">
         <div className="text-white/35">{"// standardized weather object"}</div>
         <span className="text-accent-soft">const</span>{" "}
         <span className="text-white/80">conditions</span> = {"{"}
-        <div className="pl-3">
+        <div className="pl-2 sm:pl-3">
           {rows.map(([k, v, u], i) => (
             <div key={k} className="flex items-center gap-1">
               <span className="text-white/40">{k}</span>
@@ -221,7 +221,7 @@ function RulesNode({ pulse, phase }: { pulse: MotionValue<number>; phase: number
     <NodeShell index={3} label="Rules Engine" title="Construction rules firing" explain="Maps live conditions to trade- and task-specific rules." tone={rulesTone} pulse={pulse} phase={phase}>
       <div className="space-y-1.5">
         {snap.triggered.length === 0 && (
-          <div className="flex items-center gap-2 rounded-md border border-risk-safe/25 bg-risk-safe/5 px-3 py-2 text-[11px] text-risk-safe/80">
+          <div className="flex items-center gap-2 rounded-md border border-risk-safe/25 bg-risk-safe/5 px-2.5 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-[11px] text-risk-safe/80">
             <Check className="h-3.5 w-3.5" />
             All systems nominal — no rule breaches.
           </div>
@@ -237,18 +237,19 @@ function RulesNode({ pulse, phase }: { pulse: MotionValue<number>; phase: number
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 8 }}
                 transition={{ duration: 0.35 }}
-                className={`flex items-center justify-between rounded-md border px-3 py-2 transition-colors duration-500 ${
+                className={`flex items-center justify-between rounded-md border px-2.5 py-1.5 sm:px-3 sm:py-2 transition-colors duration-500 ${
                   isActive
                     ? "border-accent/50 bg-accent/10"
                     : "border-line bg-ink-900/50"
                 }`}
               >
-                <div className="flex items-center gap-2 font-mono text-[11px]">
+                <div className="flex items-center gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-[11px]">
                   <span className="text-white/55">
                     {labelFor(r)}
                   </span>
                   <span className="text-white/30">→</span>
-                  <span className="text-white/80">{r.action}</span>
+                  <span className="text-white/80 hidden sm:inline">{r.action}</span>
+                  <span className="text-white/80 sm:hidden truncate max-w-[80px]">{r.action}</span>
                 </div>
                 <StatusDot
                   tone={
@@ -286,8 +287,8 @@ function RiskNode({ pulse, phase }: { pulse: MotionValue<number>; phase: number 
   const reduce = useReducedMotion();
   return (
     <NodeShell index={4} label="Risk Engine" title="Composite risk score" explain="Scores composite, site-weighted operational risk." tone={tier.label === "Safe" ? "safe" : tier.label === "Elevated" ? "warn" : "danger"} pulse={pulse} phase={phase}>
-      <div className="flex items-center gap-4">
-        <div className="relative" style={{ width: size, height: size }}>
+      <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
+        <div className="relative mx-auto sm:mx-0" style={{ width: size, height: size }}>
           <Tooltip label={`Composite risk: ${snap.risk} of 100 — ${tier.label}.`}>
             <svg width={size} height={size} className="-rotate-90">
               <circle
@@ -324,14 +325,14 @@ function RiskNode({ pulse, phase }: { pulse: MotionValue<number>; phase: number 
           <div className="absolute inset-0 flex flex-col items-center justify-center" aria-hidden="true">
             <AnimatedNumber
               value={snap.risk}
-              className="text-3xl font-bold tabular-nums text-white"
+              className="text-2xl sm:text-3xl font-bold tabular-nums text-white"
             />
-            <span className="text-[10px] uppercase tracking-wide text-white/45">
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-wide text-white/45">
               risk
             </span>
           </div>
         </div>
-        <div className="flex-1">
+        <div className="flex-1 text-center sm:text-left">
           <div
             className="text-sm font-semibold"
             style={{ color: tier.color }}
@@ -342,7 +343,7 @@ function RiskNode({ pulse, phase }: { pulse: MotionValue<number>; phase: number 
             Weighted from {snap.triggered.length} active{" "}
             {snap.triggered.length === 1 ? "rule" : "rules"} across the site.
           </div>
-          <div className="mt-2 flex items-center gap-1.5 text-[10px] text-white/35">
+          <div className="mt-2 flex items-center justify-center sm:justify-start gap-1.5 text-[10px] text-white/35">
             <Activity className="h-3 w-3" />
             recomputed every cycle
           </div>
@@ -406,17 +407,17 @@ function RecommendationNode({ pulse, phase }: { pulse: MotionValue<number>; phas
                   borderColor: { duration: 0.4 },
                   backgroundColor: { duration: 0.4 },
                 }}
-                className="flex items-center justify-between rounded-md border px-3 py-1.5"
+                className="flex items-center justify-between rounded-md border px-2.5 py-1.5 sm:px-3"
               >
-                <div className="flex items-center gap-2 text-[12px] text-white/80">
+                <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[12px] text-white/80">
                   <RecIcon status={rec.status} />
                   {rec.label}
                   {rec.note && (
-                    <span className="text-white/35">{rec.note}</span>
+                    <span className="text-white/35 hidden sm:inline">{rec.note}</span>
                   )}
                 </div>
                 <span
-                  className={`text-[10px] font-medium uppercase tracking-wide ${
+                  className={`text-[9px] sm:text-[10px] font-medium uppercase tracking-wide ${
                     rec.status === "ok"
                       ? "text-risk-safe"
                       : rec.status === "warn"
@@ -488,8 +489,8 @@ function DashboardNode({ pulse, phase }: { pulse: MotionValue<number>; phase: nu
       phase={phase}
     >
       <div className="grid grid-cols-2 gap-2">
-        <div className="col-span-2 rounded-lg border border-line bg-ink-900/60 p-3">
-          <div className="flex items-center justify-between text-[10px] uppercase tracking-wide text-white/40">
+        <div className="col-span-2 rounded-lg border border-line bg-ink-900/60 p-2.5 sm:p-3">
+          <div className="flex items-center justify-between text-[9px] sm:text-[10px] uppercase tracking-wide text-white/40">
             <span>Site downtime</span>
             <span className="text-risk-danger">
               -{Math.round(snap.risk / 3)}h
@@ -503,12 +504,12 @@ function DashboardNode({ pulse, phase }: { pulse: MotionValue<number>; phase: nu
         ].map((c) => (
           <div
             key={c.k}
-            className="rounded-lg border border-line bg-ink-900/60 px-3 py-2"
+            className="rounded-lg border border-line bg-ink-900/60 px-2.5 py-1.5 sm:px-3 sm:py-2"
           >
-            <div className="text-[10px] uppercase tracking-wide text-white/40">
+            <div className="text-[9px] sm:text-[10px] uppercase tracking-wide text-white/40">
               {c.k}
             </div>
-            <div className="mt-0.5 text-base font-semibold text-white">
+            <div className="mt-0.5 text-sm sm:text-base font-semibold text-white">
               {typeof c.v === "number" ? (
                 <AnimatedNumber value={c.v} />
               ) : (
@@ -519,7 +520,7 @@ function DashboardNode({ pulse, phase }: { pulse: MotionValue<number>; phase: nu
         ))}
         <HeroTimeline />
         {snap.risk < 35 && (
-          <div className="col-span-2 flex items-center gap-2 rounded-md border border-risk-safe/25 bg-risk-safe/5 px-3 py-2 text-[11px] text-risk-safe/80">
+          <div className="col-span-2 flex items-center gap-2 rounded-md border border-risk-safe/25 bg-risk-safe/5 px-2.5 py-2 text-[10px] sm:text-[11px] text-risk-safe/80">
             <Check className="h-3.5 w-3.5" />
             No operational risk detected across the site.
           </div>

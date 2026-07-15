@@ -34,7 +34,7 @@ export function Navbar() {
     >
       <div
         className={cn(
-          "mx-auto flex max-w-shell items-center justify-between px-6 py-3.5 transition-all duration-500 md:px-8",
+          "mx-auto flex items-center justify-between px-4 py-3 transition-all duration-500 sm:px-6 md:px-8",
           scrolled
             ? "my-2 rounded-2xl border border-line bg-ink-900/70 backdrop-blur-xl shadow-soft"
             : "border border-transparent bg-transparent"
@@ -78,7 +78,7 @@ export function Navbar() {
         </div>
 
         <button
-          className="lg:hidden rounded-lg border border-line p-2 text-white/80"
+          className="lg:hidden flex items-center justify-center rounded-lg border border-line p-2.5 text-white/80 min-h-[44px] min-w-[44px]"
           onClick={() => setOpen((o) => !o)}
           aria-label="Toggle menu"
         >
@@ -92,16 +92,16 @@ export function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="mx-4 mt-2 rounded-2xl border border-line bg-ink-900/90 p-4 backdrop-blur-xl lg:hidden"
+            className="mx-3 mt-2 rounded-2xl border border-line bg-ink-900/95 p-4 backdrop-blur-xl lg:hidden"
           >
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-1">
               {[...NAV, { label: "Github", href: "#github" }, { label: "Demo", href: "#demo" }].map(
                 (n) => (
                   <a
                     key={n.href}
                     href={n.href}
                     onClick={() => setOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-sm text-white/70 hover:bg-white/5"
+                    className="rounded-lg px-4 py-3.5 text-sm text-white/70 hover:bg-white/5 min-h-[44px] flex items-center"
                   >
                     {n.label}
                   </a>
@@ -110,7 +110,7 @@ export function Navbar() {
               <a
                 href="#cta"
                 onClick={() => setOpen(false)}
-                className="mt-2 rounded-full bg-white px-4 py-2.5 text-center text-sm font-medium text-ink-950"
+                className="mt-2 rounded-full bg-white px-4 py-3.5 text-center text-sm font-medium text-ink-950 min-h-[44px] flex items-center justify-center"
               >
                 Start Analysis
               </a>
