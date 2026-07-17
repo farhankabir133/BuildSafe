@@ -3,6 +3,8 @@
 import { Github, Twitter, Linkedin } from "lucide-react";
 import { Logo } from "./ui/Logo";
 
+const GITHUB_URL = "https://github.com/farhankabir133/BuildSafe";
+
 const LINKS = [
   {
     title: "Product",
@@ -30,7 +32,7 @@ export function Footer() {
               intelligence into real-time action.
             </p>
             <div className="mt-4 sm:mt-5 flex items-center gap-3 text-white/40">
-              <a href="#github" className="transition-colors hover:text-white" aria-label="Github">
+              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white" aria-label="Github">
                 <Github className="h-4 w-4" />
               </a>
               <a href="#" className="transition-colors hover:text-white" aria-label="Twitter">

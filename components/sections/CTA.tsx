@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, Github } from "lucide-react";
 import { MagneticButton } from "./ui/MagneticButton";
 
+const GITHUB_URL = "https://github.com/farhankabir133/BuildSafe";
+
 export function CTA() {
   return (
     <section id="cta" className="relative px-4 py-20 sm:px-6 sm:py-24 md:px-8 md:py-28 lg:py-36">
@@ -27,11 +29,11 @@ export function CTA() {
             real time. No demo theatre — a live system thinking out loud.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <MagneticButton href="#demo" variant="primary" size="lg">
+            <MagneticButton href="#dashboard" variant="primary" size="lg">
               Live Demo
               <ArrowRight className="h-4 w-4" />
             </MagneticButton>
-            <MagneticButton href="#github" variant="ghost" size="lg">
+            <MagneticButton href={GITHUB_URL} variant="ghost" size="lg">
               <Github className="h-4 w-4" />
               Github
             </MagneticButton>
