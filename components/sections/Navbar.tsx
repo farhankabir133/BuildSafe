@@ -14,6 +14,8 @@ const NAV = [
   { label: "Dashboard", href: "#dashboard" },
 ];
 
+const GITHUB_URL = "https://github.com/farhankabir133/BuildSafe";
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -56,7 +58,9 @@ export function Navbar() {
             </a>
           ))}
           <a
-            href="#github"
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm text-white/65 transition-colors hover:text-white"
           >
             <Github className="h-4 w-4" />
@@ -66,7 +70,7 @@ export function Navbar() {
 
         <div className="hidden items-center gap-2 lg:flex">
           <a
-            href="#demo"
+            href="#dashboard"
             className="flex items-center gap-1 rounded-full px-3.5 py-2 text-sm text-white/65 transition-colors hover:text-white"
           >
             Demo
@@ -95,18 +99,32 @@ export function Navbar() {
             className="mx-3 mt-2 rounded-2xl border border-line bg-ink-900/95 p-4 backdrop-blur-xl lg:hidden"
           >
             <div className="flex flex-col gap-1">
-              {[...NAV, { label: "Github", href: "#github" }, { label: "Demo", href: "#demo" }].map(
-                (n) => (
-                  <a
-                    key={n.href}
-                    href={n.href}
-                    onClick={() => setOpen(false)}
-                    className="rounded-lg px-4 py-3.5 text-sm text-white/70 hover:bg-white/5 min-h-[44px] flex items-center"
-                  >
-                    {n.label}
-                  </a>
-                )
-              )}
+              {NAV.map((n) => (
+                <a
+                  key={n.href}
+                  href={n.href}
+                  onClick={() => setOpen(false)}
+                  className="rounded-lg px-4 py-3.5 text-sm text-white/70 hover:bg-white/5 min-h-[44px] flex items-center"
+                >
+                  {n.label}
+                </a>
+              ))}
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-4 py-3.5 text-sm text-white/70 hover:bg-white/5 min-h-[44px] flex items-center"
+              >
+                Github
+              </a>
+              <a
+                href="#dashboard"
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-4 py-3.5 text-sm text-white/70 hover:bg-white/5 min-h-[44px] flex items-center"
+              >
+                Demo
+              </a>
               <a
                 href="#cta"
                 onClick={() => setOpen(false)}
