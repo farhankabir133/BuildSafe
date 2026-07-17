@@ -13,8 +13,12 @@
 
 import type { Weather } from "@/lib/engine";
 
+import { getEnv } from "@/lib/env";
+
 const BASE_URL = "https://api.weather-ai.co";
 const API_VERSION = "v1";
+
+const env = getEnv();
 
 /**
  * Candidate field names per metric, in priority order. Metric units assumed
@@ -110,7 +114,7 @@ export async function fetchWeather(
   lon: number,
   opts: FetchWeatherOptions = {}
 ): Promise<Weather> {
-  const key = process.env.WEATHERAI_API_KEY;
+  const key = env.WEATHERAI_API_KEY;
   if (!key) {
     throw new WeatherAIError(
       "WEATHERAI_API_KEY is not configured on the server. Add it to your environment to enable live weather.",
@@ -127,18 +131,25 @@ export async function fetchWeather(
 
   const url = `${BASE_URL}/${API_VERSION}/current?${params.toString()}`;
 
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
+
   let res: Response;
   try {
     res = await fetch(url, {
       headers: { Authorization: `Bearer ${key}` },
-      signal: opts.signal,
+      signal: opts.signal ? AbortSignal.any([opts.signal, controller.signal]) : controller.signal,
       cache: "no-store",
     });
   } catch (e) {
+    clearTimeout(timeoutId);
+    const message = e instanceof Error ? e.message : "Weather fetch failed";
     throw new WeatherAIError(
-      `Unable to reach WeatherAI: ${(e as Error).message}`,
-      502
+      message.includes("aborted") ? "WeatherAI request timed out (10s)." : message,
+      e instanceof DOMException && e.name === "AbortError" ? 504 : 502
     );
+  } finally {
+    clearTimeout(timeoutId);
   }
 
   if (!res.ok) {
