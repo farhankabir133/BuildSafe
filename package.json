@@ -6,17 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "prepare": "husky"
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "next lint --fix",
-      "vitest related --run"
-    ]
+    "lint": "next lint"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
@@ -32,22 +22,15 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.2.10",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^22.10.7",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.18.0",
     "eslint-config-next": "15.5.20",
-    "husky": "^9.1.7",
-    "jsdom": "^29.1.1",
-    "lint-staged": "^17.0.8",
     "postcss": "^8.5.10",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.3",
-    "vitest": "^4.1.10"
+    "typescript": "^5.7.3"
   },
   "overrides": {
     "postcss": "^8.5.10"
