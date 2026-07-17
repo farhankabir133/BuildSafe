@@ -6,6 +6,9 @@
 
 BuildSafe Intelligence continuously analyzes atmospheric conditions and transforms them into actionable, trade-specific directives — keeping construction projects safer, faster, and more predictable. This repository contains the marketing/showcase front-end for the platform, including a fully interactive, live-simulated **Construction Intelligence Engine** with ultra-responsive design across all devices.
 
+**Live Demo:** https://build-safe-three.vercel.app/  
+**GitHub:** https://github.com/farhankabir133/BuildSafe
+
 ---
 
 ## Table of Contents
@@ -171,6 +174,7 @@ running against its built-in simulation.
 | Styling      | [Tailwind CSS 3](https://tailwindcss.com/) with custom design tokens, ultra-responsive utilities, and mobile-first breakpoints |
 | Animation    | [Framer Motion 11](https://www.framer.com/motion/) |
 | Icons        | [lucide-react](https://lucide.dev/) + [react-icons](https://react-icons.github.io/react-icons/) |
+| Validation   | [Zod](https://zod.dev/) for runtime schema validation |
 | Language     | [TypeScript 5](https://www.typescriptlang.org/) |
 | Linting      | ESLint 9 + `eslint-config-next` |
 | Backend      | Next.js Route Handlers (API routes) + [WeatherAI](https://weather-ai.co) provider |
@@ -186,7 +190,7 @@ Construction Intelligence Engine/
 │   │   ├── weather/route.ts   # GET /api/weather — live conditions from WeatherAI
 │   │   └── risk/route.ts      # GET|POST /api/risk — engine snapshot from real data
 │   ├── layout.tsx             # Root layout, fonts, metadata
-│   ├── page.tsx               # Page composition + SimulationProvider
+│   ├── page.tsx               # Page composition + SimulationProvider + ErrorBoundary
 │   └── globals.css            # Design tokens, base styles
 ├── components/
 │   ├── engine/                # Construction Intelligence Engine (UI + context)
@@ -196,14 +200,17 @@ Construction Intelligence Engine/
 │   └── sections/              # Landing-page sections + ui primitives
 ├── lib/
 │   ├── engine.ts              # Pure engine core: types + evaluate/computeRisk/computeRecommendations/riskTier
-│   ├── weather-ai.ts          # Server WeatherAI client + response mapping
+│   ├── weather-ai.ts          # Server WeatherAI client + response mapping + timeout
 │   ├── api.ts                 # Client helper: fetchRisk(lat, lon)
+│   ├── env.ts                 # Runtime environment validation with Zod
+│   ├── logger.ts              # Structured logging with request IDs
+│   ├── rate-limit.ts          # In-memory rate limiting for API routes
+│   ├── validation.ts          # Zod schemas for API route inputs
 │   └── utils.ts               # cn() className helper
 ├── .env.example               # WeatherAI API key template
-├── .eslintrc.json             # ESLint configuration
-├── next.config.mjs            # Next.js configuration
+├── next.config.mjs            # Next.js configuration + security headers
 ├── postcss.config.mjs         # PostCSS (Tailwind + autoprefixer)
-├── tailwind.config.ts         # Tailwind theme, tokens, animations
+├── tailwind.config.ts         # Tailwind theme, tokens, animations, breakpoints
 ├── tsconfig.json              # TypeScript configuration
 └── package.json               # Dependencies and scripts
 ```
@@ -221,8 +228,8 @@ Construction Intelligence Engine/
 
 ```bash
 # Clone the repository
-git clone https://github.com/farhankabir133/construction-intelligence-engine.git
-cd construction-intelligence-engine
+git clone https://github.com/farhankabir133/BuildSafe.git
+cd BuildSafe
 
 # Install dependencies
 npm install
@@ -260,11 +267,42 @@ npm run start
 
 ---
 
+## Weather-AI Integration
+
+This project integrates with Weather-AI's API through two backend endpoints:
+
+### `/api/weather` — Live Conditions
+- Proxies `https://api.weather-ai.co/v1/current`
+- Maps response to normalized `Weather` model with defensive field detection
+- Handles multiple response shapes (`current`, `data`, `hourly`, `daily`)
+- 10-second timeout with `AbortController`
+- Safe fallbacks for missing metrics
+
+### `/api/risk` — Risk Computation
+- Fetches live conditions and runs engine snapshot
+- Returns: `weather`, `triggered` rules, `risk` score (0-100), `recommendations`
+- Supports both `GET` (lat/lon query params) and `POST` (weather body or lat/lon)
+- Rate limited: 100 req/min for risk, 50 req/min for weather
+
+### Key Implementation Details
+- **Field Mapping**: Searches multiple response containers for candidate field names
+- **Bounds Checking**: All values clamped to engine-accepted ranges
+- **Error Handling**: Custom `WeatherAIError` class with status codes (401, 403, 429, 502, 504)
+- **Input Validation**: Zod schemas validate all query parameters and request bodies
+- **Logging**: Structured JSON logs with request IDs for every API call
+- **Security**: Security headers, rate limiting, and environment validation
+
+---
+
 ## Configuration
 
 - **`tailwind.config.ts`** — Custom color tokens (`ink`, `accent`, `violet`, `risk`), fonts, shadows, animations (`shimmer`, `pulseRing`), and ultra-responsive breakpoints (`xs` through `ultra`).
-- **`next.config.mjs`** — React Strict Mode enabled.
+- **`next.config.mjs`** — React Strict Mode enabled, security headers configured (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `X-XSS-Protection`).
 - **`lib/utils.ts`** — `cn()` helper combining `clsx` and `tailwind-merge` for conditional class names.
+- **`lib/env.ts`** — Runtime environment validation with Zod (validates `WEATHERAI_API_KEY` format at startup).
+- **`lib/validation.ts`** — Zod schemas for API route input validation (`WeatherQuerySchema`, `RiskBodySchema`).
+- **`lib/rate-limit.ts`** — In-memory rate limiting: 100 req/min for `/api/risk`, 50 req/min for `/api/weather`.
+- **`lib/logger.ts`** — Structured JSON logging with request IDs for all API routes.
 - **Scenarios** — Defined in `components/engine/SimulationProvider.tsx` via the `SCENARIOS` and `RULES` arrays. Adjust baselines, thresholds, and severities to model your own site conditions.
 
 ---
